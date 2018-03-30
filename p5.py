@@ -121,16 +121,18 @@ plt.savefig('fig1.png')
 plt.show()
 
 
-#star_ra = np.degrees(star1._ra)
-#star_dec = np.degrees(star1._dec)
-#step_ra = np.degrees((star2._ra - star1._ra)/10);
-#step_dec = np.degrees((star2._dec - star2._dec)/10);
+for i in range(1,12) :
+	starz_coord = SkyCoord(ra=star_ra*u.deg, dec=star_dec*u.deg)
+	star = FixedTarget(coord=starz_coord, name="star" + str(i))
+	star_ra = star_ra + step_ra
+	#star_dec = star_dec + step_dec
+	plot_sky(starz_coord, observer, observer_time, style_kwargs=star1_style)
 
-#for i in range(1,11) :
-#	starz_coord = SkyCoord(ra=star_ra*u.deg, dec=star_dec*u.deg)
-#	star = FixedTarget(coord=starz_coord, name="star" + str(i))
-	#star_ra = star_ra + step_ra
-#	# #star_dec = star_dec + step_dec
-#	plot_sky(starz_coord, observer, observer_time, style_kwargs=star1_style)
-#plt.legend(loc='center left', bbox_to_anchor=(1.25, 0.5))
-#plt.show()
+for i in range(1,11) :
+	starz_coord = SkyCoord(ra=star_ra*u.deg, dec=star_dec*u.deg)
+	star = FixedTarget(coord=starz_coord, name="star" + str(i))
+	# star_ra = star_ra + step_ra
+	star_dec = star_dec + step_dec
+	plot_sky(starz_coord, observer, observer_time, style_kwargs=star2_style)
+plt.legend(loc='center left', bbox_to_anchor=(1.25, 0.5))
+plt.show()
