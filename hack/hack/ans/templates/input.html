@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>baBat</title>
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <link rel="stylesheet" href="{% static 'bootstrap.css' %}">
+  <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+  <div id='stars'></div>
+  <div id='stars2'></div>
+  <div id='stars3'></div>
+  <div id='title'>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    <form method="post">
+      {% csrf_token %}
+      <label style="font-size: 30px; font-family: Lato;">Select City:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      {{ form1.city }}&nbsp;&nbsp;&nbsp;
+    <input type="submit" value="GO" class="btn btn-primary"/>
+    </form>
+    <form method="post">
+      {% csrf_token %}
+      <label style="font-size: 30px; font-family: Lato;">Location:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      {{ form.lat }}&nbsp;&nbsp;&nbsp;
+      {{ form.lon }}&nbsp;&nbsp;&nbsp;
+      {{ form.ele }}&nbsp;&nbsp;&nbsp;
+    <input type="submit" value="GO" class="btn btn-primary"/>
+    </form>
+    <div class="container" style="background:transparent">
+      <table class="table table-striped table-dark">
+        <thead>
+          <tr>
+            <th>Star</th>
+            <th>Alt</th>
+            <th>Az</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in array %}
+          <tr>
+            <td>{{ i.a }}.</td>
+            <td>{{ i.b }}</td>
+            <td>{{ i.c }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+</div>
+</body>
+
+</html>
