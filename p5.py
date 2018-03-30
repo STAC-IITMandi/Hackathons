@@ -90,7 +90,7 @@ print np.degrees(star5.alt), np.degrees(star5.az)
 
 
 
-file = open("testfile.txt","r")
+file = open("data.txt","r")
 value = map(float, file.readlines())
 longitude = value[0] #float(76.9861)
 latitude = value[1] #float(31.7754)
