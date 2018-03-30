@@ -73,12 +73,31 @@ greenwich.date = '2018/3/30 12:00:00'
 
 def draw_graph(az,alt,place='Mandi',time='12:00'):
     df = pd.DataFrame({'x': alt, 'y': az})
+    # split dataframes
+    df_plus = df[df.y >= 0]
+    df_minus = df[df.y < 0]
+    # plot scatter
     fig, ax = plt.subplots()
-    ax.scatter(df.x, df.y, c=np.sign(df.y), cmap="bwr")
+    ax.scatter(df_plus.x, df_plus.y, label='Above Horizon',marker='*', c='b')
+    ax.scatter(df_minus.x, df_minus.y, label='Below Horizon',marker='x', c='r')
+    ax.legend()
+    ax.autoscale()
+    #Add Annotation
+    for i, j in zip(df.x, df.y):
+        ax.annotate('%s)' % j, xy=(round(i), j), xytext=(
+            10, 0), textcoords='offset points')
+        ax.annotate('(%s,\n,' % i, xy=(round(i), j))
+    #Add Label
     plt.ylabel('Altitude Angle')
     plt.xlabel('Azimuthal Angle')
     plt.title(place + " - " + str(time))
-    filename = os.getcwd() + "/" + place + ".png"
+    #Draw x-axis
+    kk = ax.get_xlim()
+    xx = np.linspace(kk[0], kk[1])
+    yy = np.linspace(0, 0)
+    plt.plot(xx, yy)
+
+    filename = os.getcwd() + "/astro/" + place + ".png"
     if not os.path.exists(filename):
         with open(filename, 'w'): pass
     plt.savefig(filename)
