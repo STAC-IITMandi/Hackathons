@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
 from mpl_toolkits.basemap import Basemap
+import pandas as pd
 
 # stars alt-az
 stars = [[45.645, 65.125],
@@ -70,10 +71,12 @@ greenwich.date = '2018/3/30 12:00:00'
 
 
 def draw_graph(az,alt,place='Mandi',time='12:00'):
+    df = pd.DataFrame({'x': alt, 'y': az})
+    fig, ax = plt.subplots()
+    ax.scatter(df.x, df.y, c=np.sign(df.y), cmap="bwr")
     plt.ylabel('Altitude Angle')
     plt.xlabel('Azimuthal Angle')
     plt.title(place + " - " + str(time))
-    plt.plot(alt, az, '*')
     plt.show()
 
 def main():
