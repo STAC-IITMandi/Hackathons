@@ -111,8 +111,7 @@ def main():
             s.compute(place[1])
             alt.append(np.degrees(s.alt))
             az.append(np.degrees(s.az))
-
-            # print(s.name, np.degrees(s.alt), np.degrees(s.az), place[0])
+            print(s.name, np.degrees(s.alt), np.degrees(s.az), place[0], str(place[1].date))
         draw_graph(alt, az, place[0], place[1].date)
 
 if __name__ == "__main__":
