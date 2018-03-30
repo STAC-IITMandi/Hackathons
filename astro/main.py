@@ -1,6 +1,8 @@
 import ephem
 import matplotlib.pyplot as plt
 import numpy as np
+from mpl_toolkits.mplot3d import Axes3D
+from mpl_toolkits.basemap import Basemap
 
 # stars alt-az
 stars = [[45.645, 65.125],
@@ -67,8 +69,12 @@ greenwich.elevation = 100
 greenwich.date = '2018/3/30 12:00:00'
 
 
-def graph(alt, az):
-    print ("hello")
+def draw_graph(az,alt,place='Mandi',time='12:00'):
+    plt.ylabel('Altitude Angle')
+    plt.xlabel('Azimuthal Angle')
+    plt.title(place + " - " + str(time))
+    plt.plot(alt, az, '*')
+    plt.show()
 
 def main():
     # for s in stars:
@@ -96,9 +102,15 @@ def main():
 
     mandi.date = '2018/3/30 12:00:00'
     for place in places:
+        alt = []
+        az = []
         for s in stars_ephem:
             s.compute(place[1])
-            print(s.name, np.degrees(s.alt), np.degrees(s.az), place[0])
+            alt.append(np.degrees(s.alt))
+            az.append(np.degrees(s.az))
+
+            # print(s.name, np.degrees(s.alt), np.degrees(s.az), place[0])
+        draw_graph(alt, az, place[0], place[1].date)
 
 if __name__ == "__main__":
     main()
