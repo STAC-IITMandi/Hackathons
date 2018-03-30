@@ -4,6 +4,7 @@ import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
 from mpl_toolkits.basemap import Basemap
 import pandas as pd
+import os
 
 # stars alt-az
 stars = [[45.645, 65.125],
@@ -77,7 +78,10 @@ def draw_graph(az,alt,place='Mandi',time='12:00'):
     plt.ylabel('Altitude Angle')
     plt.xlabel('Azimuthal Angle')
     plt.title(place + " - " + str(time))
-    plt.show()
+    filename = os.getcwd() + "/" + place + ".png"
+    if not os.path.exists(filename):
+        with open(filename, 'w'): pass
+    plt.savefig(filename)
 
 def main():
     # for s in stars:
